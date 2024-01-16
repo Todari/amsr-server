@@ -34,7 +34,7 @@ func CORSMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin")
 		ctx.Header("Access-Control-Allow-Credentials", "true")
-		ctx.Header("Access-Control-Allow-Origin", "http://amsr.site/*")
+		ctx.Header("Access-Control-Allow-Origin", "http://amsr.site")
 		// ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
 		ctx.Header("Access-Control-Allow-Methods", "GET, DELETE, POST")
 
