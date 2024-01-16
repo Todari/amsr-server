@@ -10,6 +10,7 @@ import (
 
 func main() {
 	router := gin.Default()
+	router.Use(CORSMiddleware())
 
 	// Connect Database
 	configs.ConnectDB()
@@ -19,8 +20,6 @@ func main() {
 		ctx_.String(http.StatusOK, "Hello, World!")
 	})
 
-	// public := router.Group("/")
-
 	protected := router.Group("/")
 	routes.UserRouter(protected)
 
@@ -28,5 +27,21 @@ func main() {
 
 	if err != nil {
 		return
+	}
+}
+
+func CORSMiddleware() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin")
+		ctx.Header("Access-Control-Allow-Credentials", "true")
+		ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
+		ctx.Header("Access-Control-Allow-Methods", "GET, DELETE, POST")
+
+		if ctx.Request.Method == "OPTIONS" {
+			ctx.AbortWithStatus(204)
+			return
+		}
+
+		ctx.Next()
 	}
 }
