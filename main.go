@@ -23,7 +23,7 @@ func main() {
 	protected := router.Group("/")
 	routes.UserRouter(protected)
 
-	err := router.Run("0.0.0.0:8080")
+	err := router.Run(":8080")
 
 	if err != nil {
 		return
@@ -34,8 +34,8 @@ func CORSMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin")
 		ctx.Header("Access-Control-Allow-Credentials", "true")
-		ctx.Header("Access-Control-Allow-Origin", "http://amsr.site")
-		// ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
+		// ctx.Header("Access-Control-Allow-Origin", "http://amsr.site")
+		ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
 		ctx.Header("Access-Control-Allow-Methods", "GET, DELETE, POST")
 
 		if ctx.Request.Method == "OPTIONS" {
