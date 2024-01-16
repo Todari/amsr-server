@@ -5,8 +5,10 @@ go 1.19
 require (
 	github.com/gin-gonic/contrib v0.0.0-20221130124618-7e01895a63f2
 	github.com/gin-gonic/gin v1.9.1
+	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/joho/godotenv v1.5.1
 	go.mongodb.org/mongo-driver v1.13.1
+	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
 
 require (

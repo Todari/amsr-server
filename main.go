@@ -3,26 +3,28 @@ package main
 import (
 	"net/http"
 
-	"github.com/gin-gonic/contrib/static"
+	"github.com/Todari/amsr-server/configs"
+	"github.com/Todari/amsr-server/routes"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
 
-	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	// Connect Database
+	configs.ConnectDB()
 
-	// Setup route group for the API
-	api := router.Group("/api")
-	{
-		api.GET("/", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "pong",
-			})
-		})
-	}
+	// Hello, World!
+	router.GET("/", func(ctx_ *gin.Context) {
+		ctx_.String(http.StatusOK, "Hello, World!")
+	})
 
-	err := router.Run(":8080")
+	// public := router.Group("/")
+
+	protected := router.Group("/")
+	routes.UserRouter(protected)
+
+	err := router.Run("localhost:8080")
 
 	if err != nil {
 		return

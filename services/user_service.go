@@ -5,6 +5,7 @@ import (
 
 	"github.com/Todari/amsr-server/configs"
 	"github.com/Todari/amsr-server/models"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -29,14 +30,14 @@ func InsertOneUser(ctx context.Context, user models.User) (*mongo.InsertOneResul
 	return userCollection.InsertOne(ctx, newUser)
 }
 
-// func FindManyUsers(ctx context.Context) (*mongo.Cursor, error) {
-// 	return userCollection.Find(ctx, bson.M{})
-// }
+func FindManyUsers(ctx context.Context) (*mongo.Cursor, error) {
+	return userCollection.Find(ctx, bson.M{})
+}
 
-// func FindOneUser(ctx context.Context, match bson.M) *mongo.SingleResult {
-// 	return userCollection.FindOne(ctx, match)
-// }
+func FindOneUser(ctx context.Context, match bson.M) *mongo.SingleResult {
+	return userCollection.FindOne(ctx, match)
+}
 
-// func UpdateOneUser(ctx context.Context, match bson.M, update bson.M) (*mongo.UpdateResult, error) {
-// 	return userCollection.UpdateOne(ctx, match, bson.D{{"$set", update}})
-// }
+func UpdateOneUser(ctx context.Context, match bson.M, update bson.M) (*mongo.UpdateResult, error) {
+	return userCollection.UpdateOne(ctx, match, bson.D{{"$set", update}})
+}
