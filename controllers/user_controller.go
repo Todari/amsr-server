@@ -17,7 +17,7 @@ func CreateUser() gin.HandlerFunc {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 
-		ctx_.SetCookie("access-token", "signed", 60*60, "/", "", false, true)
+		ctx_.SetCookie("access-token", "signed", 60*60, "/", "", false, false)
 
 		var newUser models.User
 		id := primitive.NewObjectID()
