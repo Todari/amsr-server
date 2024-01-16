@@ -9,10 +9,8 @@ import (
 	"github.com/Todari/amsr-server/services"
 	"github.com/Todari/amsr-server/structs"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
-
-var validate = validator.New()
 
 func CreateUser() gin.HandlerFunc {
 	return func(ctx_ *gin.Context) {
@@ -20,6 +18,8 @@ func CreateUser() gin.HandlerFunc {
 		defer cancel()
 
 		var newUser models.User
+		id := primitive.NewObjectID()
+		newUser.Id = id
 
 		if err := ctx_.BindJSON(&newUser); err != nil {
 			ctx_.JSON(
@@ -29,20 +29,6 @@ func CreateUser() gin.HandlerFunc {
 					Data: map[string]interface{}{
 						"type":   "Bind user error",
 						"result": err.Error(),
-					},
-				},
-			)
-			return
-		}
-
-		if validationErr := validate.Struct(&newUser); validationErr != nil {
-			ctx_.JSON(
-				http.StatusBadRequest,
-				structs.HttpResponse{
-					Success: false,
-					Data: map[string]interface{}{
-						"type":   "Validate error",
-						"result": validationErr.Error(),
 					},
 				},
 			)
