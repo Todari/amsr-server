@@ -14,7 +14,7 @@ import (
 
 func CreateUser() gin.HandlerFunc {
 	return func(ctx_ *gin.Context) {
-		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
 
 		var newUser models.User
