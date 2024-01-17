@@ -20,6 +20,11 @@ func main() {
 		ctx_.String(http.StatusOK, "Hello, World!")
 	})
 
+	// healthCheck
+	router.GET("/healthCheck", func(ctx_ *gin.Context) {
+		ctx_.String(http.StatusOK, "OK")
+	})
+
 	protected := router.Group("/")
 	routes.UserRouter(protected)
 
