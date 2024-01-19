@@ -41,8 +41,8 @@ func CORSMiddleware() gin.HandlerFunc {
 		ctx.SetCookie("access-token", "signed", 60*60, "/", "", true, false)
 		ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin")
 		ctx.Header("Access-Control-Allow-Credentials", "true")
-		ctx.Header("Access-Control-Allow-Origin", "https://amsr.site")
-		// ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
+		// ctx.Header("Access-Control-Allow-Origin", "https://amsr.site")
+		ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
 		ctx.Header("Access-Control-Allow-Methods", "GET, DELETE, POST")
 
 		if ctx.Request.Method == "OPTIONS" {
