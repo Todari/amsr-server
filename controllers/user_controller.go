@@ -13,11 +13,10 @@ import (
 )
 
 func CreateUser() gin.HandlerFunc {
+
 	return func(ctx_ *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
-
-		ctx_.SetCookie("access-token", "signed", 60*60, "/", "", false, false)
 
 		var newUser models.User
 		id := primitive.NewObjectID()
@@ -44,7 +43,7 @@ func CreateUser() gin.HandlerFunc {
 				structs.HttpResponse{
 					Success: false,
 					Data: map[string]interface{}{
-						"type":   "InsertOneProperty error",
+						"type":   "InsertOneUser error",
 						"result": err.Error(),
 					},
 				},
